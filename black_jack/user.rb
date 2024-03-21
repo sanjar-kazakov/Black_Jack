@@ -52,30 +52,4 @@ class User
     hand_value
     puts "\n"
   end
-
-  def player_turn(deck)
-    player_choice = gets.chomp.to_i
-    case player_choice
-    when 1 then skip
-    when 2 then take_a_card(deck)
-      show_hand
-    when 3 then winner_check
-    end
-  end
-
-  def dealer_turn(deck)
-    puts "\n \u2660 Dealer turn \u2660"
-    if value >= 17
-      puts "  ..."
-      sleep(1)
-      puts "\n- Dealer skipped a turn."
-      skip
-    else
-      puts "  ..."
-      sleep(1)
-      take_a_card(deck)
-      puts "\n- Dealer added a card."
-      sleep(1)
-    end
-  end
 end

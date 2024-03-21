@@ -16,24 +16,6 @@ module Help
     GAME_FLOW.each_with_index {|choice, i| puts "#{i + 1}: #{choice}"}
   end
 
-  def winner_check
-    if dealer.value > player.value && dealer.value <= MAX_VALUE
-       dealer_won
-    elsif
-      dealer.value > MAX_VALUE && player.value <= MAX_VALUE
-      player_won
-    elsif
-      player.value > dealer.value && player.value <= MAX_VALUE
-      player_won
-    elsif
-      player.value > MAX_VALUE && dealer.value <= MAX_VALUE
-      dealer_won
-    else
-      puts "\n ---Draw!---"
-      open_hands
-    end
-  end
-
   def dealer_won
     dealer.enroll_money
     player.subtract_money

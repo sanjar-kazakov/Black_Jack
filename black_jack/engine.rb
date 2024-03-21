@@ -28,7 +28,7 @@ include Help
         new_game
         run
       when 2
-        return
+        exit
       end
     end
   end
@@ -51,17 +51,58 @@ include Help
 
   def run
       game_flow
-      player.player_turn(deck)
+      player_turn(deck)
       sleep(2)
-      dealer.dealer_turn(deck)
+      dealer_turn(deck)
       puts "\n - Вскрываемся ..."
       sleep(2)
       winner_check
   end
 
-  # def result_check
-  #   winner_check if (player.hand.count == 3) || (dealer.hand == 3)
-  # end
+  def player_turn(deck)
+    player_choice = gets.chomp.to_i
+    case player_choice
+    when 1 then player.skip
+    when 2 then player.take_a_card(deck)
+      player.show_hand
+    when 3 then winner_check
+    end
+  end
+
+  def dealer_turn(deck)
+    puts "\n \u2660 Dealer turn \u2660"
+    if dealer.value >= 17
+      puts "  ..."
+      sleep(1)
+      puts "\n- Dealer skipped a turn."
+      dealer.skip
+    else
+      puts "  ..."
+      sleep(1)
+      dealer.take_a_card(deck)
+      puts "\n- Dealer added a card."
+      sleep(1)
+    end
+  end
+
+  def winner_check
+    if dealer.value > player.value && dealer.value <= MAX_VALUE
+       dealer_won
+    elsif
+      dealer.value > MAX_VALUE && player.value <= MAX_VALUE
+      player_won
+    elsif
+      player.value > dealer.value && player.value <= MAX_VALUE
+      player_won
+    elsif
+      player.value > MAX_VALUE && dealer.value <= MAX_VALUE
+      dealer_won
+    else
+      puts "\n ---Draw!---"
+      open_hands
+    end
+    game_menu
+  end
 end
 
 
